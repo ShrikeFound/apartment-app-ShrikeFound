@@ -7,13 +7,12 @@ const ProtectedRoute = ({
   component: Component,
   ...rest
 }) => {
-
   return (
     <Route
       {...rest}
       render={(props) =>
         logged_in ? (
-          <Component {...props} {...rest} />
+          <Component {...props} {...rest} logged_in />
         ) : (
           location.assign(sign_in_route)
         )

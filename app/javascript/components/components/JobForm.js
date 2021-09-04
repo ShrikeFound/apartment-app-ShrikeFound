@@ -35,7 +35,6 @@ class JobForm extends Component {
               value={formData.title}
             />
           </label>
-          {isEditing && <h1>WE'RE EDITING THIS!</h1>}
 
           <label className="label" htmlFor="city">
             <span>City</span>

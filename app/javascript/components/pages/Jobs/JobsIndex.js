@@ -1,35 +1,44 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import JobCard from "../../components/JobCard"
-import JobCardLink from "../../components/JobCardLink"
 
 class JobsIndex extends Component {
   render() {
-    const { jobs, buckets, statuses } = this.props
-    console.log("index statuses: ", statuses)
+    const { jobs, buckets, statuses, logged_in, deleteJob } = this.props
+    console.log("index delete: ", deleteJob)
     return (
       <div>
         <h1 className="page-header">Job Board</h1>
 
-        <div className="board grid grid-cols-5 gap-1 mt-2">
+        <div className="board grid grid-cols-4 gap-1 mt-2">
           {statuses &&
-            statuses.map((status) => {
-              console.log(status)
-              return (
-                <div key={status.id}>
-                  <h3
-                    className={`priority-${status.priority} text-center text-lg`}
-                  >
-                    {status.name}
-                  </h3>
+            statuses
+              .filter((s) => {
+                return s.priority
+              })
+              .map((status) => {
+                return (
+                  <div key={status.id}>
+                    <h3
+                      className={`priority-${status.priority} text-center text-lg`}
+                    >
+                      {status.name}
+                    </h3>
 
-                  {buckets[status.name] &&
-                    buckets[status.name].map((job) => {
-                      return <JobCard key={job.id} job={job} />
-                    })}
-                </div>
-              )
-            })}
+                    {buckets[status.name] &&
+                      buckets[status.name].map((job) => {
+                        return (
+                          <JobCard
+                            key={job.id}
+                            job={job}
+                            logged_in={logged_in}
+                            deleteJob={deleteJob}
+                          />
+                        )
+                      })}
+                  </div>
+                )
+              })}
 
           {/* {jobs &&
             jobs.map((j) => {

@@ -114,9 +114,7 @@ class App extends Component {
       sign_out_route,
       current_user,
     } = this.props
-
     const { jobs, statuses, buckets } = this.state
-    console.log("app statuses: ", statuses)
     return (
       <Router>
         <div className=" relative w-10/12 max-w-6xl mx-auto font-mono">
@@ -138,6 +136,7 @@ class App extends Component {
                 buckets={buckets}
                 statuses={statuses}
                 component={JobsIndex}
+                deleteJob={this.deleteJob}
               />
 
               <ProtectedRoute
